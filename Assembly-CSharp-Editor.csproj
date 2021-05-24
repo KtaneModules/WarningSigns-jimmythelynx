@@ -347,9 +347,6 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/maxzehentbauer/Dokumente/Modding KTaNE/MxMods/WarningSigns/Assets/Plugins/Managed/Newtonsoft.Json.dll</HintPath>
  </Reference>
- <Reference Include="KeepCoding">
- <HintPath>/Users/maxzehentbauer/Dokumente/Modding KTaNE/MxMods/WarningSigns/Assets/Plugins/Managed/KeepCoding.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/maxzehentbauer/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>

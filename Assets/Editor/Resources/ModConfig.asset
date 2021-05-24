@@ -14,9 +14,12 @@ MonoBehaviour:
   id: warningSigns
   title: Warning Signs
   author: jimmythelynx
-  description: "Warning Signs 1.0\nWARNING! You better get rid of that sign. Because
-    remember, no warning on the outside means no hazard on the inside.\n\nCreated
-    by: jimmythelynx\n\nSounds from freesound.org:\n\u201Ehinge-squeak\u201C by: newagesup\n\u201Escrewdriver-4\u201C
+  description: "Warning Signs 1.0\nWARNING! This bomb isn\u2019t just explosive, it\u2019s
+    also corrosive, toxic, has moving parts and is most likely bad for the environment.
+    You better get rid of that sign. Because remember, no warning on the outside means
+    no hazard on the inside. #smileyface\n\nCreated by: jimmythelynx\n\nManual available
+    here:\nRepository: https://github.com/jimmythelynx/WarningSigns\n\nSounds from
+    freesound.org:\n\u201Ehinge-squeak\u201C by: newagesup\n\u201Escrewdriver-4\u201C
     by: kwahmah-02\n\u201Emetal_Gate_squeak_mono\u201C by: Suz_Soundcreations"
   version: 1.0
   outputFolder: build
