@@ -58,7 +58,7 @@ public class warningSignSrc : MonoBehaviour {
 		"Irritant",
 		"Explosive substance",
 		"Biohazard",
-		"Optical radiation",
+		"Laser beam",
 		"Hazardous to the environment",
 		"Corrosive substance",
 		"Rotating parts",
