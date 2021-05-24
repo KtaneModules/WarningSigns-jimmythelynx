@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>Warning Signs — Keep Talking and Nobody Explodes Module</title>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/ktane-utils.js"></script>
+</head>
+<body>
+            <div class="page page-bg-01">
+                <div class="page-header">
+                    <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                    <span class="page-header-section-title">Warning Signs</span>
+                </div>
+                <div class="page-content">
+                    <img src="img/Component/warningSigns.svg" class="diagram">
+                    <h2>On the Subject of Warning Signs</h2>
+                    <p class="flavour-text">It's much easier to not screw up if you haven't screwed up already.</p>
+
+                    <p>DANGER! This module shows a large sign to warn you about a specific hazard. To disarm the module, detach the sign by unscrewing its screws, one at a time, when the <em>last digit of the countdown timer</em> is a valid digit.</p>
+                    <img src="img/WarningSigns/triangleDiagram.svg" style="width: 26%; float: right; clear: right; margin-left: 0;">
+                    <p>Aquire three valid timer digits by following these steps:</p>
+                    <ol style="padding-left: 1.5em;">
+                        <li>Construct a triangle as shown in the diagram by filling in the digits 0 to 9. Start with the <em>first digit of the serial number</em> at the top and continue in reading order, increasing each subsequent digit by 1. Wrap back to 0 if you exceed 9.</li>
+
+                        <li style="margin-top: 20px;">Aquire a number from <em>Table SGN</em> by using the hazard shown on the sign and the correct column following these rules:
+                            <ul style="padding-left: 0em; padding-top: 0.5em;">
+                                <li>If the number of unsolved modules is a mulitple of 4 use column D.</li>
+                                <li>Otherwise, if the number of unsolved modules is a mulitple of 3 use column A.</li>
+                                <li>Otherwise, if the number of unsolved modules is a mulitple of 2 use column N.</li>
+                                <li>Otherwise, use column G.</li>
+                            </ul>
+                        </li>
+
+                        <li style="margin-top: 20px;">In the triangle, find all possible equilateral triangles with the aquired number in a corner position. Then, locate the three numbers that don't appear in corner positions of these new formed triangles.
+                            find the three numbers that <em>don't lie on a straight line</em> with the aquired number. <small>(Lines in respect to the grid shown in the diagram.)</small></li>
+                    </ol>
+                    <h4>Unscrewing a screw is valid if the last digit of the countdown timer matches one of these three numbers.</h4>
+                    <p style="margin-top: 20px;"><b>NOTE:</b> Make sure to unscrew one screw for every valid timer digit. Moreover, the whole process cannot exceed 9 timer ticks from the first unscrew. Taking too long or unscrewing on an invalid timer digit will result in a strike.</p>
+
+                    
+                </div>
+                <div class="page-footer relative-footer">Page 1 of 2</div>
+            </div>
+            <div class="page page-bg-02">
+                <div class="page-header">
+                    <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                    <span class="page-header-section-title">Warning Signs</span>
+                </div>
+                <div class="page-content">
+                    <h3>Table SGN: Warning Sign Reference</h3>
+                    <br>
+                    <table>
+                        <tr>
+                            <th>Hazards</th>
+                            <th>D</th>
+                            <th>A</th>
+                            <th>N</th>
+                            <th>G</th>
+                        </tr>
+                        <tr>
+                            <td>General warning ( ! )</td>
+                            <td>1</td>
+                            <td>8</td>
+                            <td>3</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>Flammable material</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>2</td>
+                            <td>8</td>    
+                        </tr>
+                        <tr>
+                            <td>Radioactive material</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>7</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Toxic material</td>
+                            <td>7</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>High temperature</td>
+                            <td>9</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Low temperature</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Mind your head</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>9</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>High voltage</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>9</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>Irritant ( X )</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Explosive substance</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>7</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Biohazard</td>
+                            <td>6</td>
+                            <td>8</td>
+                            <td>1</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Optical radiation</td>
+                            <td>2</td>
+                            <td>7</td>
+                            <td>4</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Hazardous to the environment</td>
+                            <td>0</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Corrosive substance</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>9</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Rotating parts</td>
+                            <td>0</td>
+                            <td>4</td>
+                            <td>8</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Deep water</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Risk of falling</td>
+                            <td>9</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Cameras</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>9</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Falling objects</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Slippery floor</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td>9</td>
+                        </tr>
+                    </table>    
+                </div>
+                <div class="page-footer relative-footer">Page 2 of 2</div>
+            </div>
+</body>
+</html>
