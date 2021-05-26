@@ -157,34 +157,18 @@ public class warningSignSrc : MonoBehaviour {
 		screw.AddInteractionPunch();
 
 		checkTime = bomb.GetFormattedTime().Last().ToString();
-		int numberSolvedModules = bomb.GetSolvedModuleNames().Count;
-		int numberOfUnsolvedModules = bomb.GetModuleNames().Count() - numberSolvedModules;
 		int totalTime = (int)bomb.GetTime();
+        int numberSolvedModules = bomb.GetSolvedModuleNames().Count;
+        int numberOfUnsolvedModules = bomb.GetModuleNames().Count() - numberSolvedModules;
+        solutionIndex = GetSolutionIndex();
 
-		if (numberOfUnsolvedModules % 4 == 0) //if the number of unsolved modules is divisible by four
-		{
-			solutionIndex = 0; //use the value in manual column D
-		} 
-		else if (numberOfUnsolvedModules % 3 == 0) //if the number of unsolved modules is divisible by three
-		{
-			solutionIndex = 1; //use the value in manual column A
-		}
-		else if (numberOfUnsolvedModules % 2 == 0) //if the number of unsolved modules is divisible by two and not by four
-		{
-			solutionIndex = 2; //use the value in manual column N
-		}
-		else //otherwise
-		{
-			solutionIndex = 3; //use the value in manual column G
-		}
-		
 		if (!inputStarted) // only log the following if this is the first input
 		{
 			Debug.LogFormat("[Warning Signs #{0}] There are {1} unsolved modules on the bomb, therfore use the digit in column {2}", moduleId, numberOfUnsolvedModules, columnLetters[solutionIndex]); 
 		}
 		Debug.LogFormat("[Warning Signs #{0}] Time of interaction is: {1}", moduleId, bomb.GetFormattedTime());
 		
-		//ceck if a screw was clicked at one if the 3 valid times and start the timer.
+		//check if a screw was clicked at one if the 3 valid times and start the timer.
 		if (checkTime == solution[solutionIndex, 0].ToString() || checkTime == solution[solutionIndex, 1].ToString() || checkTime == solution[solutionIndex, 2].ToString())
 		{
 			if (stage == 0) //if this is the first stage start time keeping
@@ -241,8 +225,31 @@ public class warningSignSrc : MonoBehaviour {
 		}
 		yield return null;
 	}
+    int GetSolutionIndex()
+    {
+        int numberSolvedModules = bomb.GetSolvedModuleNames().Count;
+        int numberOfUnsolvedModules = bomb.GetModuleNames().Count() - numberSolvedModules;
 
-	IEnumerator ScrewOut(KMSelectable screw)
+        if (numberOfUnsolvedModules % 4 == 0) //if the number of unsolved modules is divisible by four
+        {
+            return 0; //use the value in manual column D
+        }
+        else if (numberOfUnsolvedModules % 3 == 0) //if the number of unsolved modules is divisible by three
+        {
+            return 1; //use the value in manual column A
+        }
+        else if (numberOfUnsolvedModules % 2 == 0) //if the number of unsolved modules is divisible by two and not by four
+        {
+            return 2; //use the value in manual column N
+        }
+        else //otherwise
+        {
+            return 3; //use the value in manual column G
+        }
+
+    }
+
+    IEnumerator ScrewOut(KMSelectable screw)
 	{
 		//float rotateDelta = 1f / (animationTime * smooth);
 		Audio.PlaySoundAtTransform("squeak", transform);
@@ -297,4 +304,59 @@ public class warningSignSrc : MonoBehaviour {
 		}
 		yield return null;
 	}
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use <!{0} unscrew 1 3 6> to unscrew the screws at those timer digits. The order is irrelevant.";
+#pragma warning restore 414
+
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        command = command.Trim().ToUpperInvariant();
+        List<string> parameters = command.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        if (parameters[0] == "UNSCREW" || parameters[0] == "PRESS" || parameters[0] == "SUBMIT")
+            parameters.RemoveAt(0);
+        else yield break;
+        if (parameters.Count != 3)
+        {
+            yield return "sendtochaterror Improper amount of parameters.";
+            yield break;
+        }
+        if (parameters.Any(x => !Enumerable.Range(0,10).Select(y => y.ToString()).Contains(x)))
+        {
+            yield return "sendtochaterror Invalid digit " + parameters.First(x => !Enumerable.Range(0, 10).Select(y => y.ToString()).Contains(x)) + ".";
+            yield break;
+        }
+        List<int> digits = parameters.Select(x => int.Parse(x)).ToList();
+        int currentScrew = 0;
+        yield return null;
+        while (!digits.Contains((int)bomb.GetTime() % 10))
+            yield return "trycancel"; //lets you cancel the first input, but not the others.
+        while (digits.Count > 0)
+        {
+            while (!digits.Contains((int)bomb.GetTime() % 10))
+                yield return null;
+            digits.Remove((int)bomb.GetTime() % 10);
+            screws[currentScrew].OnInteract();
+            currentScrew++;
+        }
+    }
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        int currentScrew = 0;
+        List<int> submission;
+        do
+        {
+            submission = new List<int> { solution[GetSolutionIndex(), 0], solution[GetSolutionIndex(), 1], solution[GetSolutionIndex(), 2] };
+            yield return true;
+        } while (!submission.Contains((int)bomb.GetTime() % 10)); 
+        submission = new List<int> { solution[GetSolutionIndex(), 0], solution[GetSolutionIndex(), 1], solution[GetSolutionIndex(), 2] };
+        while (submission.Count > 0)
+        {
+            while (!submission.Contains((int)bomb.GetTime() % 10))
+                yield return null;
+            submission.Remove((int)bomb.GetTime() % 10);
+            screws[currentScrew].OnInteract();
+            yield return new WaitForSeconds(0.3f);
+            currentScrew++;
+        }
+    }
 }
