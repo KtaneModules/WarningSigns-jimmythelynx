@@ -16,7 +16,7 @@ public class warningSignSrc : MonoBehaviour {
 	public Sprite[] signSprites;
 	public Sprite smileySprite;
 
-	private string checkTime; //time when a screw is clicked
+	private int checkTime; //time when a screw is clicked
 	private int firstPressTime; // first digit of the timer, when the first screw was pressed 
 
 	private int chosenSign;
@@ -43,7 +43,7 @@ public class warningSignSrc : MonoBehaviour {
 	private string[] columnLetters = new string[4] { "D", "A", "N", "G" };
 	private string[] stageLog = new string[3] { "First", "Second", "Third" };
 
-	private string[] alreadyPressedNumbers = new string[2]; // saves the values on wich a screw was pressed in stage 1 [0] and stage 2 [1]
+	private int[] alreadyPressedNumbers = new int[2] {-1, -1}; // saves the values on wich a screw was pressed in stage 1 [0] and stage 2 [1] (nothing pressed is represented by -1)
 	private KMSelectable[] alreadyPressedScrews = new KMSelectable[2]; // saves the screw selectables that were pressed in stage 1 [0] and 2 [1]
 
 	private string[] signNames = new string[20] {
@@ -156,7 +156,7 @@ public class warningSignSrc : MonoBehaviour {
 		if (moduleSolved || screw == alreadyPressedScrews[0] || screw == alreadyPressedScrews[1]) {return;} //retrun if this screw has already been pressed.
 		screw.AddInteractionPunch();
 
-		checkTime = bomb.GetFormattedTime().Last().ToString();
+		checkTime = (int)bomb.GetTime() % 10; //get the last seconds digit of the countdown timer.
 		int totalTime = (int)bomb.GetTime();
         int numberSolvedModules = bomb.GetSolvedModuleNames().Count;
         int numberOfUnsolvedModules = bomb.GetModuleNames().Count() - numberSolvedModules;
@@ -167,9 +167,10 @@ public class warningSignSrc : MonoBehaviour {
 			Debug.LogFormat("[Warning Signs #{0}] There are {1} unsolved modules on the bomb, therfore use the digit in column {2}", moduleId, numberOfUnsolvedModules, columnLetters[solutionIndex]); 
 		}
 		Debug.LogFormat("[Warning Signs #{0}] Time of interaction is: {1}", moduleId, bomb.GetFormattedTime());
+		//Debug.LogFormat("[Warning Signs #{0}] Time of interaction is: {1}", moduleId, checkTime);
 		
 		//check if a screw was clicked at one if the 3 valid times and start the timer.
-		if (checkTime == solution[solutionIndex, 0].ToString() || checkTime == solution[solutionIndex, 1].ToString() || checkTime == solution[solutionIndex, 2].ToString())
+		if (checkTime == solution[solutionIndex, 0] || checkTime == solution[solutionIndex, 1] || checkTime == solution[solutionIndex, 2])
 		{
 			if (stage == 0) //if this is the first stage start time keeping
 			{
@@ -211,8 +212,8 @@ public class warningSignSrc : MonoBehaviour {
 		Audio.PlaySoundAtTransform("screwdriver", transform);
 		inputStarted = false; //reset input timeslot
 		stage = 0; //set stage back to 0
-		alreadyPressedNumbers[0] = ""; // reset the already pressed numbers
-		alreadyPressedNumbers[1] = "";
+		alreadyPressedNumbers[0] = -1; // reset the already pressed numbers
+		alreadyPressedNumbers[1] = -1;
 		if (alreadyPressedScrews[0] != null)
 		{
 			StartCoroutine(ScrewIn(alreadyPressedScrews[0]));
@@ -225,6 +226,7 @@ public class warningSignSrc : MonoBehaviour {
 		}
 		yield return null;
 	}
+
     int GetSolutionIndex()
     {
         int numberSolvedModules = bomb.GetSolvedModuleNames().Count;

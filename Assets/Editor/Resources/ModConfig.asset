@@ -14,14 +14,16 @@ MonoBehaviour:
   id: warningSigns
   title: Warning Signs
   author: jimmythelynx
-  description: "Warning Signs 1.1\nWARNING! This bomb isn\u2019t just explosive, it\u2019s
+  description: "Warning Signs 1.2\nWARNING! This bomb isn\u2019t just explosive, it\u2019s
     also corrosive, toxic, has moving parts and is most likely bad for the environment.
     You better get rid of that sign. Because remember, no warning on the outside means
-    no hazard on the inside. #smileyface\n\nCreated by: jimmythelynx\nAdditional coding
-    by: Danny7007 (TP support and Autosolver)\n\nManual available here: https://github.com/jimmythelynx/WarningSigns/blob/main/Manual/pdfs/Modules/Warning%20Signs%20%E2%80%94%20Keep%20Talking%20and%20Nobody%20Explodes%20Module.pdf\nRepository:
+    no hazard on the inside. #smileyface\n\nModule ID: warningSigns\n\nCreated by:
+    jimmythelynx\nAdditional coding by: Danny7007 (TP support and Autosolver)\nThe
+    module uses a screw asset and pieces of code from \u201EThe Screw\u201C by: SL7205
+    and JakkOfKlubs.\n\nManual available here: https://ktane.timwi.de/HTML/Warning%20Signs.html\nRepository:
     https://github.com/jimmythelynx/WarningSigns\n\nSounds from freesound.org:\n\u201Ehinge-squeak\u201C
     by: newagesup\n\u201Escrewdriver-4\u201C by: kwahmah-02\n\u201Emetal_Gate_squeak_mono\u201C
     by: Suz_Soundcreations"
-  version: 1.1
+  version: 1.2
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 62c8432f2a3184b82abc4265ca1ffa20, type: 3}
