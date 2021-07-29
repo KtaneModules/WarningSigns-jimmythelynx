@@ -311,32 +311,21 @@ public class warningSignSrc : MonoBehaviour {
     IEnumerator ProcessTwitchCommand(string command)
     {
         command = command.Trim().ToUpperInvariant();
-        List<string> parameters = command.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        if (parameters[0] == "UNSCREW" || parameters[0] == "PRESS" || parameters[0] == "SUBMIT")
-            parameters.RemoveAt(0);
-        else yield break;
-        if (parameters.Count != 3)
+		Match m = Regex.Match(command, @"^UNSCREW\s+((?:[0-9]\s*){3})$");
+		if (m.Success)
         {
-            yield return "sendtochaterror Improper amount of parameters.";
-            yield break;
-        }
-        if (parameters.Any(x => !Enumerable.Range(0,10).Select(y => y.ToString()).Contains(x)))
-        {
-            yield return "sendtochaterror Invalid digit " + parameters.First(x => !Enumerable.Range(0, 10).Select(y => y.ToString()).Contains(x)) + ".";
-            yield break;
-        }
-        List<int> digits = parameters.Select(x => int.Parse(x)).ToList();
-        int currentScrew = 0;
-        yield return null;
-        while (!digits.Contains((int)bomb.GetTime() % 10))
-            yield return "trycancel"; //lets you cancel the first input, but not the others.
-        while (digits.Count > 0)
-        {
-            while (!digits.Contains((int)bomb.GetTime() % 10))
-                yield return null;
-            digits.Remove((int)bomb.GetTime() % 10);
-            screws[currentScrew].OnInteract();
-            currentScrew++;
+			yield return null;
+			List<int> submission = m.Groups[1].Value.Where(x => x != ' ').Select(x => x - '0').ToList();
+			while (!submission.Contains((int)bomb.GetTime() % 10))
+				yield return "trycancel";
+            for (int i = 0; i < 3; i++)
+            {
+				yield return new WaitForSeconds(0.05f);
+				screws[i].OnInteract();
+				submission.Remove((int)bomb.GetTime() % 10);
+				while (!submission.Contains((int)bomb.GetTime() % 10))
+					yield return null;
+            }
         }
     }
     IEnumerator TwitchHandleForcedSolve()
