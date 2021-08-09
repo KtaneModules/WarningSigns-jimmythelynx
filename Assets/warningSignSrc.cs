@@ -306,6 +306,8 @@ public class warningSignSrc : MonoBehaviour {
         {
 			yield return null;
 			List<int> submission = m.Groups[1].Value.Where(x => x != ' ').Select(x => x - '0').ToList();
+			while (submission.Contains((int)bomb.GetTime() % 10))
+				yield return "trycancel"; //This is needed or else there can be a bug where it presses at the wrong time.
 			while (!submission.Contains((int)bomb.GetTime() % 10))
 				yield return "trycancel";
             for (int i = 0; i < 3; i++)
